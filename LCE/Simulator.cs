@@ -12,79 +12,36 @@ namespace LCE
 {
     public partial class Simulator : Form
     {
-        public Component c { get; set; }
-        public List<Component> Components { get; set; }
-        public static int SnapSize = 5;
-        public Point MoveStart { get; set; }
+        // Static members
+        public static int SNAP_SIZE = 5;
+
+        public static Point GridSnap(Point Location)
+        {
+            int x = (Location.X / SNAP_SIZE) * SNAP_SIZE;
+            int y = (Location.Y / SNAP_SIZE) * SNAP_SIZE;
+            return new Point(x, y);
+        }
+
+        public enum MouseState { Default, Drag, Wire, Selecting }
+
+        // Instance members
+        private Scene Scene { get; set; }
+        private MouseState CurrentMouseState { get; set; }
+
+        
 
         public Simulator()
         {
             InitializeComponent();
-            Components = new List<Component>();
-            c = null;
-            MoveStart = new Point();
+            Scene = new Scene();
+            CurrentMouseState = MouseState.Default;
         }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Simulator_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                Components.Add(new InputPin(GridSnap(e.Location), 50, 50));
-                Invalidate(true);
-            }
-        }
-
-        public static Point GridSnap (Point Location)
-        {
-            int x = (Location.X / SnapSize) * SnapSize;
-            int y = (Location.Y / SnapSize) * SnapSize;
-            return new Point(x, y);
-        }
+        
 
         private void Simulator_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.White);
-            foreach (Component c in Components)
-            {
-                c.Draw(e.Graphics);
-            }
-        }
-
-        private void Simulator_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                foreach (Component com in Components)
-                {
-                    if (com.Selected(e.Location))
-                    {
-                        c = com;
-                        
-                        MoveStart = c.TopLeft;
-                        
-                    }
-                }
-            }
-        }
-
-        private void Simulator_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (c != null)
-            {
-                c.Move(e.Location.X - MoveStart.X, e.Location.Y - MoveStart.Y);
-                MoveStart = c.TopLeft;
-                Invalidate(true);
-            }
-        }
-
-        private void Simulator_MouseUp(object sender, MouseEventArgs e)
-        {
-            c = null;
+            Scene.Draw(e.Graphics);
         }
     }
 }

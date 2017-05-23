@@ -20,9 +20,7 @@ namespace LCE
             this.Height = Height;
         }
 
-        public abstract void Draw(Graphics g);
-
-        public bool Selected(Point p)
+        public override bool Selected(Point p)
         {
             return (p.X >= TopLeft.X && p.Y >= TopLeft.Y && p.X <= TopLeft.X + Width && p.Y <= TopLeft.Y + Height);
         }

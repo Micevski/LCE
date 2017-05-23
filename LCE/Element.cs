@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -15,8 +16,9 @@ namespace LCE
             ShouldDelete = false;
         }
 
-
+        public abstract void Draw(Graphics g);
         protected abstract State evaluate();
+        public abstract bool Selected(Point p);
 
     }
 }
