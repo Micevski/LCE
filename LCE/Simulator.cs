@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LCE.Components;
+using System.Diagnostics;
 
 namespace LCE
 {
@@ -27,6 +28,8 @@ namespace LCE
         // Instance members
         private Scene Scene { get; set; }
         private MouseState CurrentMouseState { get; set; }
+        private Point ClickedPosition { get; set; }
+        private WireBuilder WireBuilder { get; set; }
 
         
 
@@ -35,6 +38,7 @@ namespace LCE
             InitializeComponent();
             Scene = new Scene();
             CurrentMouseState = MouseState.Default;
+            WireBuilder = new WireBuilder();
         }
         
 
@@ -42,6 +46,35 @@ namespace LCE
         {
             e.Graphics.Clear(Color.White);
             Scene.Draw(e.Graphics);
+            WireBuilder.Draw(e.Graphics);
+        }
+
+        private void Simulator_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                if(CurrentMouseState == MouseState.Default)
+                {
+                    WireBuilder.Init(null, e.Location);
+                    CurrentMouseState = MouseState.Wire;
+                }else if(CurrentMouseState == MouseState.Wire)
+                {
+                    WireBuilder.AddPoint(e.Location);
+                }
+            }
+
+            if (e.Button == MouseButtons.Right && CurrentMouseState == MouseState.Default)
+            {
+                cmsMainMenu.Show(Cursor.Position);
+                ClickedPosition = e.Location;
+            }
+            Invalidate(true);
+        }
+
+        private void aND2ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Scene.AddElement(new AndGate(ClickedPosition, 50, 50));
+            Invalidate(true);
         }
     }
 }

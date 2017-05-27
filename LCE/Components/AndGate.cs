@@ -14,7 +14,9 @@ namespace LCE.Components
 
         public override void Draw(Graphics g)
         {
-            throw new NotImplementedException();
+            Brush br = new SolidBrush(Color.Red);
+            g.FillRectangle(br, TopLeft.X, TopLeft.Y, Width, Height);
+            br.Dispose();
         }
 
         protected override State evaluate()

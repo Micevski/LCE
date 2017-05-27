@@ -42,5 +42,14 @@ namespace LCE
             return boolToState(!operand.value);
         }
 
+        public static State And(State operand1, State operand2)
+        {
+            if(operand1 == State.Undefined || operand2 == State.Undefined)
+            {
+                return State.Undefined;
+            }
+            return boolToState(operand1.value && operand2.value);
+        }
+
     }
 }
