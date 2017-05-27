@@ -51,5 +51,61 @@ namespace LCE
             return boolToState(operand1.value && operand2.value);
         }
 
+
+        public static State Or(State operand1, State operand2)
+        {
+            if (operand1 == State.Undefined || operand2 == State.Undefined)
+            {
+                return State.Undefined;
+            }
+            return boolToState(operand1.value || operand2.value);
+        }
+        
+
+        public static State Not(State operand)
+        {
+            if(operand == State.Undefined)
+            {
+                return State.Undefined;
+            }
+            return boolToState(!operand.value);
+        }
+
+
+        public static State Xor(State operand1, State operand2)
+        {
+            if (operand1 == State.Undefined || operand2 == State.Undefined)
+            {
+                return State.Undefined;
+            }
+            return boolToState(operand1.value ^ operand2.value);
+        }
+
+        public static State Nand (State operand1, State operand2)
+        {
+            if (operand1 == State.Undefined || operand2 == State.Undefined)
+            {
+                return State.Undefined;
+            }
+            return boolToState(Not(And(operand1,operand2)).value);
+        }
+
+        public static State Nor (State operand1, State operand2)
+        {
+            if (operand1 == State.Undefined || operand2 == State.Undefined)
+            {
+                return State.Undefined;
+            }
+            return boolToState(Not(Or(operand1, operand2)).value);
+        }
+
+        public static State Xnor (State operand1, State operand2)
+        {
+            if (operand1 == State.Undefined || operand2 == State.Undefined)
+            {
+                return State.Undefined;
+            }
+            return boolToState(Not(Xor(operand1, operand2)).value);
+        }
     }
 }
