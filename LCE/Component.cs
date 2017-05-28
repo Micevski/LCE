@@ -12,6 +12,8 @@ namespace LCE
         public static Image OR_IMAGE;
         public static Image XOR_IMAGE;
         public static Image NOT_IMAGE;
+        public static Image LED_ON;
+        public static Image LED_OFF;
 
         static Component()
         {
@@ -19,6 +21,8 @@ namespace LCE
             OR_IMAGE = Properties.Resources.OR;
             XOR_IMAGE = Properties.Resources.XOR;
             NOT_IMAGE = Properties.Resources.NOT;
+            LED_ON = Properties.Resources.LED_ON;
+            LED_OFF = Properties.Resources.LED_OFF;
         }
 
         public Point TopLeft { get; set; }

@@ -8,7 +8,7 @@ namespace LCE
 {
     public class Wire : Element
     {
-        public static int WIRE_WIDTH = 3;
+        public static int WIRE_WIDTH = 2;
 
         private Element Source { get; set; }
 
@@ -36,11 +36,11 @@ namespace LCE
                 pen = new Pen(Color.Magenta, WIRE_WIDTH);
             }else if(Value == State.True)
             {
-                pen = new Pen(Color.Red, WIRE_WIDTH);
+                pen = new Pen(Color.Green, WIRE_WIDTH);
             }
             else
             {
-                pen = new Pen(Color.Black, WIRE_WIDTH);
+                pen = new Pen(Color.Red, WIRE_WIDTH);
             }
             WireHandle from = initial;
             foreach (WireHandle to in inner)

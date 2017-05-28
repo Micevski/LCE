@@ -14,6 +14,8 @@ namespace LCE
     public partial class Simulator : Form
     {
         // Static members
+        public static Image PLAY_ICON;
+        public static Image PAUSE_ICON;
         public static int SNAP_SIZE = 5;
 
         public static Point GridSnap(Point Location)
@@ -21,6 +23,12 @@ namespace LCE
             int x = (Location.X / SNAP_SIZE) * SNAP_SIZE;
             int y = (Location.Y / SNAP_SIZE) * SNAP_SIZE;
             return new Point(x, y);
+        }
+
+        static Simulator()
+        {
+            PLAY_ICON = Properties.Resources.PLAY_ICON;
+            PAUSE_ICON = Properties.Resources.PAUSE_ICON;
         }
 
         public enum MouseState { Default, Drag, Wire }
@@ -112,6 +120,7 @@ namespace LCE
             if(CurrentMouseState == MouseState.Drag)
             {
                 CurrentMouseState = MouseState.Default;
+                //SelectedElement = null;
             }
             Invalidate(true);
         }
@@ -121,7 +130,10 @@ namespace LCE
             if (Simulating)
             {
                 InputPin ip = Scene.InputClicked(e.Location);
-                ip.Toggle();
+                if(ip != null)
+                {
+                    ip.Toggle();
+                }
             }
 
 
@@ -149,24 +161,49 @@ namespace LCE
         private void btnSimulate_Click(object sender, EventArgs e)
         {
             Simulating = !Simulating;
+            if (Simulating)
+            {
+                btnSimulate.Image = PAUSE_ICON;
+            }
+            else
+            {
+                btnSimulate.Image = PLAY_ICON;
+            }
         }
 
         private void nOTToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Scene.AddElement(new NotGate(ClickedPosition, 50, 50));
+            Scene.AddElement(new NotGate(ClickedPosition, 60, 60));
             Invalidate(true);
         }
 
         private void aND2ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Scene.AddElement(new AndGate(ClickedPosition, 50, 50));
+            Scene.AddElement(new AndGate(ClickedPosition, 60, 60));
             Invalidate(true);
         }
 
         private void inputToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Scene.AddInput(new InputPin(ClickedPosition, 50, 50));
+            Scene.AddInput(new InputPin(ClickedPosition, 60, 60));
             Invalidate(true);
+        }
+
+        private void outputToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scene.AddElement(new OutputPin(ClickedPosition, 60, 60));
+            Invalidate(true);
+        }
+
+        private void Simulator_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                if (SelectedElement != null)
+                {
+                    Scene.RemoveElement(SelectedElement);
+                }
+            }
         }
     }
 }

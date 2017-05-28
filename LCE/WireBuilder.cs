@@ -10,7 +10,7 @@ namespace LCE
     public class WireBuilder
     {
         public static Color BUILDER_COLOR = Color.Blue;
-        public static int BUILDER_WIDTH = 3;
+        public static int BUILDER_WIDTH = 2;
 
         public bool Free { get; set; }
         public Element Source { get; set; }

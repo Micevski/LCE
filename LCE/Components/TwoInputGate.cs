@@ -18,7 +18,7 @@ namespace LCE.Components
         {
             Input1 = new WireHandle(new Point(TopLeft.X, TopLeft.Y + 20));
             Input2 = new WireHandle(new Point(TopLeft.X, TopLeft.Y + 40));
-            Output = new WireHandle(new Point(TopLeft.X + 50, TopLeft.Y + 30));
+            Output = new WireHandle(new Point(TopLeft.X + 60, TopLeft.Y + 30));
             Output.Source = this;
         }
 

@@ -14,6 +14,7 @@ namespace LCE.Components
 
         public InputPin(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)
         {
+            GateImage = LED_OFF;
             Input = State.Undefined;
             Output = new WireHandle(new Point(TopLeft.X + 50, TopLeft.Y));
             Output.Source = this;
@@ -41,7 +42,7 @@ namespace LCE.Components
                 color = Color.Red;
             }else
             {
-                color = Color.Gray;
+                color = Color.Magenta;
             }
             Brush br = new SolidBrush(color);
             g.FillRectangle(br, TopLeft.X, TopLeft.Y, Width, Height);

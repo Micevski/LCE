@@ -49,6 +49,7 @@
     <Compile Include="Components\InputPin.cs" />
     <Compile Include="Components\NotGate.cs" />
     <Compile Include="Components\OneInputGate.cs" />
+    <Compile Include="Components\OutputPin.cs" />
     <Compile Include="Components\TwoInputGate.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Form1.cs">
@@ -100,9 +101,13 @@
   <ItemGroup>
     <Content Include="Resources\AND.png" />
     <Content Include="Resources\demux1x4.png" />
+    <Content Include="Resources\LED-OFF.png" />
+    <Content Include="Resources\LED-ON.png" />
     <Content Include="Resources\mux4x1.png" />
     <Content Include="Resources\NOT.png" />
     <Content Include="Resources\OR.png" />
+    <Content Include="Resources\PAUSE_ICON.jpg" />
+    <Content Include="Resources\PLAY_ICON.png" />
     <Content Include="Resources\XOR.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

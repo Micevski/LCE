@@ -95,5 +95,10 @@ namespace LCE
             return null;
         }
 
+        public void RemoveElement(Element e)
+        {
+            Elements.Remove(e);
+        }
+
     }
 }
