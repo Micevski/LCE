@@ -12,27 +12,19 @@ namespace LCE.Components
 
         public OutputPin(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)
         {
-            Input = new WireHandle(new Point(TopLeft.X, TopLeft.Y + 25));
+            Input = new WireHandle(new Point(TopLeft.X, TopLeft.Y + 30));
         }
 
         public override void Draw(Graphics g)
         {
-            Color c;
-            if(Value == State.Undefined)
+            if(Value == State.True)
             {
-                c = Color.Magenta;
-            }
-            else if(Value == State.True)
-            {
-                c = Color.Green;
+                g.DrawImage(LED_ON, TopLeft.X, TopLeft.Y, Width, Height);
             }
             else
             {
-                c = Color.Red;
+                g.DrawImage(LED_OFF, TopLeft.X, TopLeft.Y, Width, Height);
             }
-            Brush br = new SolidBrush(c);
-            g.FillEllipse(br, TopLeft.X, TopLeft.Y, 50, 50);
-            br.Dispose();
             Input.Draw(g);
         }
 

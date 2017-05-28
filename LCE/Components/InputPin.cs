@@ -14,9 +14,8 @@ namespace LCE.Components
 
         public InputPin(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)
         {
-            GateImage = LED_OFF;
             Input = State.Undefined;
-            Output = new WireHandle(new Point(TopLeft.X + 50, TopLeft.Y));
+            Output = new WireHandle(new Point(TopLeft.X + 60, TopLeft.Y + 30));
             Output.Source = this;
         }
 
@@ -32,21 +31,14 @@ namespace LCE.Components
 
         public override void Draw(Graphics g)
         {
-            Color color = Color.White;
-            if(Input == State.True)
+            if (Input == State.True)
             {
-                color = Color.Green;
+                g.DrawImage(LED_ON, TopLeft.X, TopLeft.Y, Width, Height);
             }
-            else if(Input == State.False)
+            else
             {
-                color = Color.Red;
-            }else
-            {
-                color = Color.Magenta;
+                g.DrawImage(LED_OFF, TopLeft.X, TopLeft.Y, Width, Height);
             }
-            Brush br = new SolidBrush(color);
-            g.FillRectangle(br, TopLeft.X, TopLeft.Y, Width, Height);
-            br.Dispose();
             Output.Draw(g);
         }
 
