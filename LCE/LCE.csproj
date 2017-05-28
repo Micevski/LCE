@@ -47,6 +47,8 @@
     <Compile Include="Component.cs" />
     <Compile Include="Components\AndGate.cs" />
     <Compile Include="Components\InputPin.cs" />
+    <Compile Include="Components\NotGate.cs" />
+    <Compile Include="Components\OneInputGate.cs" />
     <Compile Include="Components\TwoInputGate.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Form1.cs">
@@ -80,6 +82,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Simulator.resx">
       <DependentUpon>Simulator.cs</DependentUpon>
@@ -93,6 +96,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\AND.png" />
+    <Content Include="Resources\demux1x4.png" />
+    <Content Include="Resources\mux4x1.png" />
+    <Content Include="Resources\NOT.png" />
+    <Content Include="Resources\OR.png" />
+    <Content Include="Resources\XOR.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

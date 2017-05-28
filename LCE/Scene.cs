@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LCE.Components;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,15 +12,23 @@ namespace LCE
         public int Count { get { return Elements.Count; } }
 
         private List<Element> Elements { get; set; }
+        private List<InputPin> Inputs { get; set; }
 
         public Scene()
         {
             Elements = new List<Element>();
+            Inputs = new List<InputPin>();
         }
 
         public void AddElement(Element e)
         {
             Elements.Add(e);
+        }
+
+        public void AddInput(InputPin input)
+        {
+            Inputs.Add(input);
+            AddElement(input);
         }
 
         public void Draw(Graphics g)
@@ -69,6 +78,18 @@ namespace LCE
                 if (w != null)
                 {
                     return w;
+                }
+            }
+            return null;
+        }
+
+        public InputPin InputClicked(Point p)
+        {
+            foreach(InputPin i in Inputs)
+            {
+                if (i.Selected(p))
+                {
+                    return i;
                 }
             }
             return null;

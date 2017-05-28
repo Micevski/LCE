@@ -7,11 +7,25 @@ using System.Text;
 namespace LCE
 {
     public abstract class Component : Element
-    {    
+    {
+        public static Image AND_IMAGE;
+        public static Image OR_IMAGE;
+        public static Image XOR_IMAGE;
+        public static Image NOT_IMAGE;
+
+        static Component()
+        {
+            AND_IMAGE = Properties.Resources.AND;
+            OR_IMAGE = Properties.Resources.OR;
+            XOR_IMAGE = Properties.Resources.XOR;
+            NOT_IMAGE = Properties.Resources.NOT;
+        }
 
         public Point TopLeft { get; set; }
         protected int Width { get; set; }
         protected int Height { get; set; }
+
+        public Image GateImage { get; set; }
 
         public Component(Point TopLeft, int Width, int Height)
         {

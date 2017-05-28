@@ -80,8 +80,8 @@
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.btnSimulate = new System.Windows.Forms.ToolStripLabel();
+            this.nOTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSimulate = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.cmsMainMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -337,7 +337,7 @@
             this.iOToolStripMenuItem,
             this.aND2ToolStripMenuItem});
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.createToolStripMenuItem.Text = "create";
             // 
             // iOToolStripMenuItem
@@ -346,33 +346,35 @@
             this.inputToolStripMenuItem,
             this.outputToolStripMenuItem});
             this.iOToolStripMenuItem.Name = "iOToolStripMenuItem";
-            this.iOToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.iOToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.iOToolStripMenuItem.Text = "I/O";
             // 
             // inputToolStripMenuItem
             // 
             this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
-            this.inputToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.inputToolStripMenuItem.Text = "Input";
+            this.inputToolStripMenuItem.Click += new System.EventHandler(this.inputToolStripMenuItem_Click);
             // 
             // outputToolStripMenuItem
             // 
             this.outputToolStripMenuItem.Name = "outputToolStripMenuItem";
-            this.outputToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.outputToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.outputToolStripMenuItem.Text = "Output";
             // 
             // aND2ToolStripMenuItem
             // 
             this.aND2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aND2ToolStripMenuItem1});
+            this.aND2ToolStripMenuItem1,
+            this.nOTToolStripMenuItem});
             this.aND2ToolStripMenuItem.Name = "aND2ToolStripMenuItem";
-            this.aND2ToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.aND2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aND2ToolStripMenuItem.Text = "Ports";
             // 
             // aND2ToolStripMenuItem1
             // 
             this.aND2ToolStripMenuItem1.Name = "aND2ToolStripMenuItem1";
-            this.aND2ToolStripMenuItem1.Size = new System.Drawing.Size(105, 22);
+            this.aND2ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.aND2ToolStripMenuItem1.Text = "AND2";
             this.aND2ToolStripMenuItem1.Click += new System.EventHandler(this.aND2ToolStripMenuItem1_Click);
             // 
@@ -406,7 +408,6 @@
             this.pasteToolStripButton,
             this.toolStripSeparator7,
             this.helpToolStripButton,
-            this.toolStripButton1,
             this.btnSimulate});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
@@ -496,19 +497,20 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
             // 
-            // toolStripButton1
+            // nOTToolStripMenuItem
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.nOTToolStripMenuItem.Name = "nOTToolStripMenuItem";
+            this.nOTToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nOTToolStripMenuItem.Text = "NOT";
+            this.nOTToolStripMenuItem.Click += new System.EventHandler(this.nOTToolStripMenuItem_Click);
             // 
             // btnSimulate
             // 
+            this.btnSimulate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSimulate.Image = ((System.Drawing.Image)(resources.GetObject("btnSimulate.Image")));
+            this.btnSimulate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSimulate.Name = "btnSimulate";
-            this.btnSimulate.Size = new System.Drawing.Size(27, 22);
+            this.btnSimulate.Size = new System.Drawing.Size(23, 22);
             this.btnSimulate.Text = "Sim";
             this.btnSimulate.Click += new System.EventHandler(this.btnSimulate_Click);
             // 
@@ -593,7 +595,7 @@
         private System.Windows.Forms.ToolStripButton pasteToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripLabel btnSimulate;
+        private System.Windows.Forms.ToolStripMenuItem nOTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnSimulate;
     }
 }

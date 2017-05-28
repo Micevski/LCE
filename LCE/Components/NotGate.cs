@@ -6,13 +6,11 @@ using System.Text;
 
 namespace LCE.Components
 {
-    public class AndGate : TwoInputGate
+    public class NotGate : OneInputGate
     {
-
-
-        public AndGate(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)
+        public NotGate(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)
         {
-            GateImage = AND_IMAGE;
+            GateImage = NOT_IMAGE;
         }
 
         public override void Draw(Graphics g)
@@ -23,11 +21,11 @@ namespace LCE.Components
 
         protected override State evaluate()
         {
-            if(Input1.Source==null || Input2.Source == null)
+            if(Input.Source == null)
             {
                 return State.Undefined;
             }
-            return State.And(Input1.Source.Value, Input2.Source.Value);
+            return State.Not(Input.Source.Value);
         }
     }
 }

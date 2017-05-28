@@ -10,10 +10,13 @@ namespace LCE.Components
     public class InputPin : Component
     {
         private State Input { get; set; }
+        public WireHandle Output { get; set; }
 
         public InputPin(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)
         {
             Input = State.Undefined;
+            Output = new WireHandle(new Point(TopLeft.X + 50, TopLeft.Y));
+            Output.Source = this;
         }
 
         public void Toggle()
@@ -43,6 +46,23 @@ namespace LCE.Components
             Brush br = new SolidBrush(color);
             g.FillRectangle(br, TopLeft.X, TopLeft.Y, Width, Height);
             br.Dispose();
+            Output.Draw(g);
         }
+
+        public override void Move(Point delta)
+        {
+            base.Move(delta);
+            Output.Move(delta);
+        }
+
+        public override WireHandle HookOutHandle(Point p)
+        {
+            if (Output.Selected(p))
+            {
+                return Output;
+            }
+            return null;
+        }
+
     }
 }

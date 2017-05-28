@@ -55,12 +55,6 @@ namespace LCE
 
 
 
-        private void aND2ToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Scene.AddElement(new AndGate(ClickedPosition, 50, 50));
-            Invalidate(true);
-        }
-
         private void Simulator_MouseDown(object sender, MouseEventArgs e)
         {
             if(e.Button == MouseButtons.Left)
@@ -124,6 +118,13 @@ namespace LCE
 
         private void Simulator_MouseClick(object sender, MouseEventArgs e)
         {
+            if (Simulating)
+            {
+                InputPin ip = Scene.InputClicked(e.Location);
+                ip.Toggle();
+            }
+
+
             if(e.Button == MouseButtons.Right)
             {
                 if(CurrentMouseState == MouseState.Default)
@@ -148,6 +149,24 @@ namespace LCE
         private void btnSimulate_Click(object sender, EventArgs e)
         {
             Simulating = !Simulating;
+        }
+
+        private void nOTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scene.AddElement(new NotGate(ClickedPosition, 50, 50));
+            Invalidate(true);
+        }
+
+        private void aND2ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Scene.AddElement(new AndGate(ClickedPosition, 50, 50));
+            Invalidate(true);
+        }
+
+        private void inputToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scene.AddInput(new InputPin(ClickedPosition, 50, 50));
+            Invalidate(true);
         }
     }
 }
