@@ -7,6 +7,7 @@ using System.Text;
 
 namespace LCE.Components
 {
+    [Serializable]
     public abstract class TwoInputGate : Component
     {
         public WireHandle Input1 { get; set; }

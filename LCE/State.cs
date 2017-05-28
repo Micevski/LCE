@@ -5,6 +5,7 @@ using System.Text;
 
 namespace LCE
 {
+    [Serializable]
     public class State
     {
         public static State True;

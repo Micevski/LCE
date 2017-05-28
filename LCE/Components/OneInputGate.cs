@@ -6,6 +6,7 @@ using System.Text;
 
 namespace LCE.Components
 {
+    [Serializable]
     public abstract class OneInputGate : Component
     {
         public WireHandle Input { get; set; }
@@ -14,7 +15,7 @@ namespace LCE.Components
         public OneInputGate(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)
         {
             Input = new WireHandle(new Point(TopLeft.X, TopLeft.Y + 30));
-            Output = new WireHandle(new Point(TopLeft.X + 50, TopLeft.Y + 30));
+            Output = new WireHandle(new Point(TopLeft.X + 60, TopLeft.Y + 30));
             Output.Source = this;
         }
 

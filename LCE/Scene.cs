@@ -7,6 +7,7 @@ using System.Text;
 
 namespace LCE
 {
+    [Serializable]
     public class Scene
     {
         public int Count { get { return Elements.Count; } }

@@ -6,6 +6,7 @@ using System.Text;
 
 namespace LCE.Components
 {
+    [Serializable]
     public class OutputPin : Component
     {
         public WireHandle Input { get; set; }

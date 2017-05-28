@@ -7,13 +7,12 @@ using System.Text;
 namespace LCE.Components
 {
     [Serializable]
-    public class AndGate : TwoInputGate
+    public class OrGate : TwoInputGate
     {
 
-
-        public AndGate(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)
+        public OrGate(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)
         {
-            GateImage = AND_IMAGE;
+            GateImage = OR_IMAGE;
         }
 
         public override void Draw(Graphics g)
@@ -24,11 +23,11 @@ namespace LCE.Components
 
         protected override State evaluate()
         {
-            if(Input1.Source==null || Input2.Source == null)
+            if(Input1.Source == null || Input2.Source == null)
             {
                 return State.Undefined;
             }
-            return State.And(Input1.Source.Value, Input2.Source.Value);
+            return State.Or(Input1.Source.Value, Input2.Source.Value);
         }
     }
 }

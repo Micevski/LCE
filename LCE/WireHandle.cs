@@ -7,6 +7,7 @@ using System.Text;
 
 namespace LCE
 {
+    [Serializable]
     public class WireHandle
     {
         public static int Radius = 5;

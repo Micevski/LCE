@@ -6,6 +6,7 @@ using System.Text;
 
 namespace LCE.Components
 {
+    [Serializable]
     public class NotGate : OneInputGate
     {
         public NotGate(Point TopLeft, int Width, int Height) : base(TopLeft, Width, Height)

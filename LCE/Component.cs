@@ -6,6 +6,7 @@ using System.Text;
 
 namespace LCE
 {
+    [Serializable]
     public abstract class Component : Element
     {
         public static Image AND_IMAGE;

@@ -6,6 +6,7 @@ using System.Text;
 
 namespace LCE
 {
+    [Serializable]
     public abstract class Element
     {
         public bool ShouldDelete { get; set; }

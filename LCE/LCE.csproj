@@ -49,8 +49,10 @@
     <Compile Include="Components\InputPin.cs" />
     <Compile Include="Components\NotGate.cs" />
     <Compile Include="Components\OneInputGate.cs" />
+    <Compile Include="Components\OrGate.cs" />
     <Compile Include="Components\OutputPin.cs" />
     <Compile Include="Components\TwoInputGate.cs" />
+    <Compile Include="Components\XorGate.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

@@ -43,6 +43,8 @@ namespace LCE
 
         private bool Simulating { get; set; }
 
+        private string FileName { get; set; }
+
         public Simulator()
         {
             InitializeComponent();
@@ -51,6 +53,7 @@ namespace LCE
             WireBuilder = new WireBuilder();
             SelectedElement = null;
             Simulating = false;
+            FileName = null;
         }
         
 
@@ -195,6 +198,18 @@ namespace LCE
             Invalidate(true);
         }
 
+        private void oR2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scene.AddElement(new OrGate(ClickedPosition, 60, 60));
+            Invalidate(true);
+        }
+
+        private void xOR2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scene.AddElement(new XorGate(ClickedPosition, 60, 60));
+            Invalidate(true);
+        }
+
         private void Simulator_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Delete)
@@ -203,6 +218,64 @@ namespace LCE
                 {
                     Scene.RemoveElement(SelectedElement);
                 }
+            }
+        }
+
+
+        // Serialization
+
+        public void saveFile()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void openFile()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFile();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileName = null;
+            saveFile();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFile();
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            saveFile();
+        }
+
+        private void openToolStripButton_Click(object sender, EventArgs e)
+        {
+            openFile();
+        }
+
+        private DialogResult savePrompt()
+        {
+            return MessageBox.Show("Would you like to save this file?", "Save file?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        } 
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Simulator_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dr = savePrompt();
+            if (dr == DialogResult.Yes)
+            {
+                saveFile();
             }
         }
     }

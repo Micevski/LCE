@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace LCE.Components
 {
+    [Serializable]
     public class InputPin : Component
     {
         private State Input { get; set; }

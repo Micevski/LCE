@@ -6,6 +6,7 @@ using System.Text;
 
 namespace LCE
 {
+    [Serializable]
     public class Wire : Element
     {
         public static int WIRE_WIDTH = 2;
@@ -36,11 +37,11 @@ namespace LCE
                 pen = new Pen(Color.Magenta, WIRE_WIDTH);
             }else if(Value == State.True)
             {
-                pen = new Pen(Color.Green, WIRE_WIDTH);
+                pen = new Pen(Color.Red, WIRE_WIDTH);
             }
             else
             {
-                pen = new Pen(Color.Red, WIRE_WIDTH);
+                pen = new Pen(Color.Black, WIRE_WIDTH);
             }
             WireHandle from = initial;
             foreach (WireHandle to in inner)
