@@ -8,15 +8,21 @@ using System.Text;
 using System.Windows.Forms;
 using LCE.Components;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 namespace LCE
 {
+    [Serializable]
     public partial class Simulator : Form
     {
         // Static members
         public static Image PLAY_ICON;
         public static Image PAUSE_ICON;
         public static int SNAP_SIZE = 5;
+
+        public string fileName { get; set; }
 
         public static Point GridSnap(Point Location)
         {
@@ -28,7 +34,7 @@ namespace LCE
         static Simulator()
         {
             PLAY_ICON = Properties.Resources.PLAY_ICON;
-            PAUSE_ICON = Properties.Resources.PAUSE_ICON;
+            PAUSE_ICON = Properties.Resources.PAUSE_ICON; 
         }
 
         public enum MouseState { Default, Drag, Wire }
@@ -43,7 +49,6 @@ namespace LCE
 
         private bool Simulating { get; set; }
 
-        private string FileName { get; set; }
 
         public Simulator()
         {
@@ -53,7 +58,7 @@ namespace LCE
             WireBuilder = new WireBuilder();
             SelectedElement = null;
             Simulating = false;
-            FileName = null;
+            fileName = null;
         }
         
 
@@ -226,12 +231,51 @@ namespace LCE
 
         public void saveFile()
         {
-            throw new NotImplementedException();
+           if(fileName == null)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Save LCE file (*.lce)|*.lce";
+                sfd.Title = "Save LCE file";
+                sfd.FileName = fileName;
+                if(sfd.ShowDialog() == DialogResult.OK)
+                {
+                    fileName = sfd.FileName;
+                }
+            }
+           if (fileName != null)
+            {
+                using (FileStream fs = new FileStream(fileName, FileMode.Create))
+                {
+                    IFormatter formater = new BinaryFormatter();
+                    formater.Serialize(fs, Scene);
+                }
+            }
         }
 
         public void openFile()
         {
-            throw new NotImplementedException();
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Open LCE (*.lce)|*.lce";
+            ofd.Title = "Open LCE";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                fileName = ofd.FileName;
+                try
+                {
+                    using (FileStream fs = new FileStream(fileName, FileMode.Open))
+                    {
+                        IFormatter formatter = new BinaryFormatter();
+                        Scene = (Scene)formatter.Deserialize(fs);
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Could not read file: " + fileName);
+                    fileName = null;
+                    return;
+                }
+                Invalidate(true);
+            }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -241,7 +285,7 @@ namespace LCE
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileName = null;
+            fileName = null;
             saveFile();
         }
 
