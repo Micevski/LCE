@@ -12,30 +12,43 @@ namespace LCE
 
         private Element Source { get; set; }
 
-        private Point initial;
-        private List<Point> inner;
-        private Point terminal;
+        private WireHandle initial;
+        private List<WireHandle> inner;
+        private WireHandle terminal;
         private Color color;
 
-        public Wire(Element source, Point initial, List<Point> inner, Point terminal)
+        public Wire(Element source, WireHandle initial, List<WireHandle> inner, WireHandle terminal)
         {
+            Component = false;
             this.Source = source;
             this.initial = initial;
             this.inner = inner;
             this.terminal = terminal;
+            this.color = Color.Black;
         }
 
 
         public override void Draw(Graphics g)
         {
-            Pen pen = new Pen(color, WIRE_WIDTH);
-            Point from = initial;
-            foreach (Point to in inner)
+            Pen pen;
+            if(Value == State.Undefined)
             {
-                g.DrawLine(pen, from, to);
+                pen = new Pen(Color.Magenta, WIRE_WIDTH);
+            }else if(Value == State.True)
+            {
+                pen = new Pen(Color.Red, WIRE_WIDTH);
+            }
+            else
+            {
+                pen = new Pen(Color.Black, WIRE_WIDTH);
+            }
+            WireHandle from = initial;
+            foreach (WireHandle to in inner)
+            {
+                g.DrawLine(pen, from.Location, to.Location);
                 from = to;
             }
-            g.DrawLine(pen, from, terminal);
+            g.DrawLine(pen, from.Location, terminal.Location);
 
             pen.Dispose();
         }
@@ -43,6 +56,7 @@ namespace LCE
         public override bool Selected(Point p)
         {
             throw new NotImplementedException();
+            return false;
         }
 
         protected override State evaluate()

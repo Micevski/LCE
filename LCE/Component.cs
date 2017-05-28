@@ -15,6 +15,7 @@ namespace LCE
 
         public Component(Point TopLeft, int Width, int Height)
         {
+            Component = true;
             this.TopLeft = TopLeft;
             this.Width = Width;
             this.Height = Height;
@@ -25,10 +26,10 @@ namespace LCE
             return (p.X >= TopLeft.X && p.Y >= TopLeft.Y && p.X <= TopLeft.X + Width && p.Y <= TopLeft.Y + Height);
         }
 
-        public void Move(int x, int y)
+        public virtual void Move(Point delta)
         {
-            TopLeft = new Point(TopLeft.X + x, TopLeft.Y + y);
-            TopLeft = Simulator.GridSnap(TopLeft);
+            TopLeft = new Point(TopLeft.X + delta.X, TopLeft.Y + delta.Y);
+            //TopLeft = Simulator.GridSnap(TopLeft);
         }
 
     }

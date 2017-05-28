@@ -14,40 +14,42 @@ namespace LCE
 
         public bool Free { get; set; }
         public Element Source { get; set; }
-        public Point Initial { get; set; }
-        public List<Point> Inner { get; set; }
-        public Point Terminal { get; set; }
+        public WireHandle Initial { get; set; }
+        public List<WireHandle> Inner { get; set; }
+        public WireHandle Terminal { get; set; }
+        public Point EndPosition { get; set; }
 
         public WireBuilder()
         {
             this.Dismiss();
         }
 
-        public void Init(Element source, Point initial)
+        public void Init(Element source, WireHandle initial)
         {
-            //this.Source = source;
+            this.Source = source;
             this.Initial = initial;
-            this.Inner = new List<Point>();
+            this.Inner = new List<WireHandle>();
             this.Free = false;
         }
 
         public void Dismiss()
         {
             this.Source = null;
-            this.Initial = Point.Empty;
+            this.Initial = null;
             this.Inner = null;
-            this.Terminal = Point.Empty;
+            this.Terminal = null;
             this.Free = true;
         }
 
         public void AddPoint(Point p)
         {
-            this.Inner.Add(p);
+            this.Inner.Add(new WireHandle(p));
         }
 
-        public Wire Finalize(Point terminal)
+        public Wire Finalize(WireHandle terminal)
         {
             this.Terminal = terminal;
+            this.Terminal.Source = this.Source;
             Wire wire = new Wire(this.Source, this.Initial, this.Inner, this.Terminal);
             this.Dismiss();
             return wire;
@@ -60,14 +62,14 @@ namespace LCE
                 return;
             }
             Pen pen = new Pen(BUILDER_COLOR, BUILDER_WIDTH);
-            Point from = Initial;
-            foreach (Point to in Inner)
+            WireHandle from = Initial;
+            foreach (WireHandle to in Inner)
             {
                 
-                g.DrawLine(pen, from, to);
+                g.DrawLine(pen, from.Location, to.Location);
                 from = to;
             }
-            g.DrawLine(pen, from, Terminal);
+            g.DrawLine(pen, from.Location, EndPosition);
 
             pen.Dispose();
         }
